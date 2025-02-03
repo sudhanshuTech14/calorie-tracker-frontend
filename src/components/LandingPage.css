@@ -1,0 +1,133 @@
+/* General Styling */
+.landing-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #333;
+}
+
+/* Hero Section */
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 20px;
+    background-color: #4CAF50;
+    color: white;
+}
+
+.hero-text {
+    max-width: 500px;
+    text-align: left;
+    padding-right: 40px;
+}
+
+.hero-text h1 {
+    font-size: 36px;
+    margin-bottom: 10px;
+}
+
+.hero-text p {
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 18px;
+    background-color: white;
+    color: #4CAF50;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #45a049;
+    color: white;
+}
+
+.hero-image img {
+    width: 400px;
+    max-width: 100%;
+    border-radius: 10px;
+}
+
+/* Features Section */
+.features-section {
+    padding: 50px 20px;
+    background-color: #f9f9f9;
+}
+
+.features-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.features-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 250px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: scale(1.05);
+}
+
+.feature-card h3 {
+    color: #4CAF50;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 50px 20px;
+    background-color: #fff;
+}
+
+.testimonials-section h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.testimonials {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.testimonial-card {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial-card span {
+    display: block;
+    margin-top: 10px;
+    font-style: italic;
+}
+
+/* Footer */
+.footer {
+    background-color: #333;
+    color: white;
+    padding: 15px;
+    margin-top: 20px;
+}

@@ -1,0 +1,51 @@
+/* ConsumptionList.module.css */
+.consumedList {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.consumedItem {
+    background-color: #f9f9f9;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.consumedItem:hover {
+    background-color: #f1f1f1;
+}
+
+.foodHeader {
+    display: flex;
+    justify-content: space-between;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.foodHeader span {
+    display: inline-block;
+}
+
+.quantity {
+    font-size: 14px;
+    font-weight: normal;
+    color: #555;
+}
+
+.foodDetails {
+    margin-top: 10px;
+    font-size: 14px;
+    color: #333;
+    background-color: #eef2f7;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.foodDetails p {
+    margin: 5px 0;
+}

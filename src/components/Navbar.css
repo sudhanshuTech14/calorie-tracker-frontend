@@ -1,0 +1,38 @@
+/* Navbar Styles */
+.navbar {
+    background-color: #38a169; /* Green background */
+    padding: 1rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-title {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.navbar-links {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.navbar-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.navbar-link:hover {
+    color: #2f855a; /* Darker green on hover */
+}
+
+.navbar-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+}
+
+.navbar-button:hover {
+    color: #2f855a; /* Darker green on hover */
+}
