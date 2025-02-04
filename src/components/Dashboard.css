@@ -1,6 +1,6 @@
 /* Dashboard Container */
 .dashboard-container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 40px auto;
     padding: 20px;
     background-color: #ffffff;
@@ -56,6 +56,11 @@
     border-color: #007bff;
     outline: none;
     box-shadow: 0 0 6px rgba(0, 123, 255, 0.3);
+}
+
+/* Makes sure dropdown list doesn’t expand too wide */
+.food-select:after {
+    max-width: 150px;
 }
 
 /* Stylish Add Button */
@@ -242,4 +247,48 @@
 .add-other-food-button:hover {
     background: linear-gradient(135deg, #218838, #1e7e34);
     transform: scale(1.05);
+}
+
+.date-picker-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.date-picker-container label {
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+.date-picker-container input {
+    max-width: 150px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* When date picker is opened */
+.date-picker-container input:focus {
+    border-color: #53d878; /* Highlight when active */
+    box-shadow: 0 0 5px rgba(87, 223, 139, 0.95);
+}
+
+/* Custom styles for the dropdown calendar */
+.date-picker-container input::-webkit-calendar-picker-indicator {
+    filter: invert(0.5); /* Makes icon more visible */
+    cursor: pointer;
+    padding: 5px;
+}
+
+.total-calories {
+    margin-left: 10px;
+    font-weight: bold;
+    background: #8cff00;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #333;
 }

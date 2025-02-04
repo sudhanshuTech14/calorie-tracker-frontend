@@ -81,6 +81,26 @@ export const getConsumedFoods = async () => {
     return response.data;
 };
 
+export const getConsumedFoodsByDate = async (token, selectedDate) => {
+    try {
+        const response = await axios.get(
+            `http://127.0.0.1:8000/api/consumed-foods-by-date/`, 
+            {
+                params: {
+                    date: selectedDate, // This should be the selected date
+                },
+                headers: {
+                    Authorization: `Bearer ${token}`, // Token in the header, not in the URL
+                },
+            }
+        );
+        return response.data;
+    } catch (error) {
+        console.error("Error fetching consumed foods by date:", error);
+    }
+};
+
+
 export const addConsumption = async (foodId, quantity) => {
     const token = localStorage.getItem("token");  // Get token from localStorage
     if (!token) {

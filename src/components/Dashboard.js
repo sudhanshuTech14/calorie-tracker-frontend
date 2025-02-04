@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext, useCallback } from "react";
 import { AuthContext } from "../context/AuthContext";
-import { getFoods, getConsumedFoods, addConsumption, updateConsumption, deleteConsumption } from "../api";
+import { getFoods, getConsumedFoodsByDate, addConsumption, updateConsumption, deleteConsumption } from "../api";
 import AddFoodModal from "./AddFoodModal";  // Import the new modal
+import NutritionPieChart from "./NutritionPieChart";
 import { FaEdit, FaTrash, FaChevronDown, FaChevronUp } from "react-icons/fa";
 import "./Dashboard.css";
 
@@ -12,6 +13,8 @@ const Dashboard = () => {
     const [selectedFood, setSelectedFood] = useState("");
     const [quantity, setQuantity] = useState(1);
     const [loading, setLoading] = useState(true);
+    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().split("T")[0]);
+    const [totalCalories, setTotalCalories] = useState(0);
 
     // Modal state
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -27,16 +30,28 @@ const Dashboard = () => {
 
         try {
             const foodsData = await getFoods();
-            const consumedData = await getConsumedFoods(token);
+            console.log(foodsData);
+            const consumedData = await getConsumedFoodsByDate(token, selectedDate);
+
+            // Map consumedData to consumedFoods if necessary
+            const consumedFoodsArray = consumedData.consumed_foods || [];
             setFoods(foodsData);
-            setConsumedFoods(consumedData);
-            setLoading(false);
+            setConsumedFoods(consumedFoodsArray);
+            const total = consumedFoodsArray.reduce(
+                (sum, item) => sum + (item.food_consumed.calories * item.quantity),
+                0
+            );
+            setTotalCalories(total);
+            
         } catch (error) {
             console.error("Error fetching data:", error);
+        } finally {
+            setLoading(false);
         }
-    }, [token]);
+    }, [token, selectedDate]);
 
     useEffect(() => {
+        console.log("Fetching data...");
         fetchData();
     }, [fetchData]);
 
@@ -89,11 +104,10 @@ const Dashboard = () => {
     return (
         <div className="dashboard-container">
             <h2 className="welcome-heading">Welcome back, {username}!! 👋</h2>
-
             {loading ? (
-                <p className="loading-message">Loading...</p>
-            ) : (
-                <>
+            <p>Loading...</p>
+        ) : (
+            <>
                     <div className="add-food">
                         <h3 className="section-heading">🍽️ Add Food Consumption</h3>
                         <form onSubmit={handleAddConsumption} className="food-form">
@@ -104,11 +118,16 @@ const Dashboard = () => {
                                 className="food-select"
                             >
                                 <option value="">Select Food</option>
-                                {foods.map((food) => (
-                                    <option key={food.id} value={food.id}>
-                                        {food.name} - {food.calories} cal
-                                    </option>
-                                ))}
+                                {foods.length > 0 ? (
+    foods.map((food) => (
+        <option key={food.id} value={food.id}>
+            {food.name} - {food.calories} cal
+        </option>
+    ))
+) : (
+    <option value="">No foods available</option>
+)}
+
                             </select>
                             <input
                                 type="number"
@@ -135,8 +154,27 @@ const Dashboard = () => {
                         token={token}
                     />
 
-<div className="consumed-foods">
-    <h3 className="section-heading">Consumed Foods</h3>
+                    <>
+                    <br/>
+                    <br/>
+                    </>
+
+                    <div className="consumed-foods">
+    <h2 className="section-heading">Today's Consumption</h2>
+    {/* Date Picker & Total Calories */}
+    <div className="date-picker-container">
+        <label>Select Date: </label>
+        <input
+            type="date"
+            value={selectedDate}
+            onChange={(e) => setSelectedDate(e.target.value)}
+        />
+        <span className="total-calories">Total Calories Intake: {totalCalories} kcal</span>
+    </div>
+
+    {/* Pie Chart */}
+    <NutritionPieChart selectedDate={selectedDate} />
+
     <ul className="consumedList">
         {consumedFoods.length > 0 ? (
             consumedFoods.map((item) => (
@@ -185,8 +223,8 @@ const Dashboard = () => {
     </ul>
 </div>
 
-                </>
-            )}
+
+                
 
             {isEditModalOpen && (
                 <div className="modal">
@@ -208,6 +246,8 @@ const Dashboard = () => {
                     </div>
                 </div>
             )}
+            </>
+    )}
         </div>
     );
 };
